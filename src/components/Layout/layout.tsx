@@ -71,7 +71,7 @@ const Sidebar: React.FC = () => {
       {/* Botón de hamburguesa mejorado */}
       <button
         onClick={toggleMenu}
-        className="md:hidden fixed top-4 left-4 z-50 p-3 rounded-lg bg-white shadow-lg hover:bg-gray-100 transition-colors duration-200"
+        className="md:hidden fixed top-4 right-4 z-50 p-3 rounded-lg bg-white shadow-lg hover:bg-gray-100 transition-colors duration-200"
         aria-label="Toggle menu"
       >
         <MenuIcon className="h-6 w-6 text-gray-800" />
