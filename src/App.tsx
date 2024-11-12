@@ -1,15 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import FormularioPublicacion from './components/form';
 import PublicacionesAyuda from './components/portal';
-import { useState } from 'react';
-import { Publicacion } from './components/card';
 
 const App = () => {
-  const [publicaciones, setPublicaciones] = useState<Publicacion[]>([]);
-
-  const agregarPublicacion = (nuevaPublicacion: Publicacion) => {
-    setPublicaciones([...publicaciones, nuevaPublicacion]);
-  };
 
   return (
     <Router>
@@ -18,17 +11,17 @@ const App = () => {
           {/* Ruta para registrar una nueva publicación */}
           <Route
             path="/registrar"
-            element={<FormularioPublicacion onSubmit={agregarPublicacion} />}
+            element={<FormularioPublicacion/>}
           />
           {/* Ruta para ver las publicaciones */}
           <Route
             path="/publicaciones"
-            element={<PublicacionesAyuda publicaciones={publicaciones} />}
+            element={<PublicacionesAyuda/>}
           />
           {/* Ruta raíz, redirigir a la página de ver publicaciones */}
           <Route
             path="/"
-            element={<PublicacionesAyuda publicaciones={publicaciones} />}
+            element={<PublicacionesAyuda/>}
           />
         </Routes>
       </div>
