@@ -97,6 +97,7 @@ const Content: React.FC = () => {
   return (
     <div className="ml-0 md:ml-64 p-4">
       <Routes>
+        <Route path="/" element={<PublicacionesAyuda />} />
         <Route path="/usuarios" element={<Usuarios/>} />
         <Route path="/publicaciones" element={<PublicacionesAyuda />} />
         <Route path="/registrar" element={<FormularioPublicacion />} />
