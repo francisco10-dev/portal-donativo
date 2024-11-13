@@ -1,51 +1,70 @@
 import React, { useState } from 'react';
 import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { UsersIcon, CollectionIcon, ClipboardListIcon, MenuIcon } from '@heroicons/react/outline';
+import { UsersIcon, CollectionIcon, ClipboardListIcon, MenuIcon, LogoutIcon } from '@heroicons/react/outline';
 import FormularioPublicacion from '../form/form';
 import PublicacionesAyuda from '../publications/portal';
 import Usuarios from '../users/users';
 
-// Componente del menú móvil (drawer)
 const MobileMenu: React.FC<{ isOpen: boolean; toggleMenu: () => void }> = ({ isOpen, toggleMenu }) => {
   const location = useLocation();
-  
+
+  const logout = () => {
+    toggleMenu();
+    localStorage.clear();
+    window.location.reload();
+  };
+
   return (
     <div
-      className={`fixed inset-0 bg-gray-800/90 backdrop-blur-sm z-50 transition-all duration-300 ease-in-out ${
+      className={`fixed inset-0 bg-gray-800/80 backdrop-blur-sm z-50 transition-all duration-300 ease-in-out ${
         isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
-      <div className="flex flex-col items-center justify-center h-full space-y-2">
+      <div className="flex flex-col items-center justify-center h-full space-y-4">
+        {/* Enlace Usuarios */}
         <Link
           to="/usuarios"
-          className={`text-white text-xl py-4 px-6 rounded-lg transition-all duration-200 w-64 text-center ${
+          className={`text-white text-lg py-3 px-5 rounded-lg transition-all duration-200 w-56 text-center ${
             location.pathname === '/usuarios' ? 'bg-blue-600' : 'hover:bg-gray-700'
           }`}
           onClick={toggleMenu}
         >
-          <UsersIcon className="h-5 w-5 mr-3 inline-block" />
+          <UsersIcon className="h-5 w-5 inline-block" />
           Usuarios
         </Link>
+
+        {/* Enlace Publicaciones */}
         <Link
           to="/publicaciones"
-          className={`text-white text-xl py-4 px-6 rounded-lg transition-all duration-200 w-64 text-center ${
+          className={`text-white text-lg py-3 px-5 rounded-lg transition-all duration-200 w-56 text-center ${
             location.pathname === '/publicaciones' ? 'bg-blue-600' : 'hover:bg-gray-700'
           }`}
           onClick={toggleMenu}
         >
-          <CollectionIcon className="h-5 w-5 mr-3 inline-block" />
+          <CollectionIcon className="h-5 w-5 inline-block" />
           Publicaciones
         </Link>
+
+        {/* Enlace Registrar */}
         <Link
           to="/registrar"
-          className={`text-white text-xl py-4 px-6 rounded-lg transition-all duration-200 w-64 text-center ${
+          className={`text-white text-lg py-3 px-5 rounded-lg transition-all duration-200 w-56 text-center ${
             location.pathname === '/registrar' ? 'bg-blue-600' : 'hover:bg-gray-700'
           }`}
           onClick={toggleMenu}
         >
-          <ClipboardListIcon className="h-5 w-5 mr-3 inline-block" />
+          <ClipboardListIcon className="h-5 w-5 inline-block" />
           Registrar
         </Link>
+
+        {/* Opción Salir */}
+        <button
+          onClick={logout}
+          className="text-white text-lg py-3 px-5 rounded-lg w-56 text-center bg-red-600 hover:bg-red-700 transition-all duration-200"
+        >
+          <LogoutIcon className="h-5 w-5 inline-block" />
+          Salir
+        </button>
       </div>
     </div>
   );
