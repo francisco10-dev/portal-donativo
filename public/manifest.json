@@ -1,8 +1,8 @@
 {
   "name": "Dona",
   "short_name": "Dona",
-  "theme_color": "#fff",
-  "background_color": "#fff",
+  "theme_color": "#2563EB",
+  "background_color": "#2563EB",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
