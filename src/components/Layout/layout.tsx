@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { UsersIcon, CollectionIcon, ClipboardListIcon, MenuIcon } from '@heroicons/react/outline';
-import FormularioPublicacion from '../form';
-import PublicacionesAyuda from '../portal';
+import FormularioPublicacion from '../form/form';
+import PublicacionesAyuda from '../publications/portal';
 import Usuarios from '../users/users';
 
 // Componente del menú móvil (drawer)
@@ -55,10 +55,17 @@ const MobileMenu: React.FC<{ isOpen: boolean; toggleMenu: () => void }> = ({ isO
 const Sidebar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const go = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const onLanding = () => {
+    localStorage.removeItem('isLanding');
+    go('/')
+    window.location.reload();
+  }
 
   const menuItems = [
     { path: '/usuarios', icon: UsersIcon, label: 'Usuarios' },
@@ -83,9 +90,9 @@ const Sidebar: React.FC = () => {
       {/* Sidebar para pantallas grandes */}
       <div className="hidden md:block w-64 bg-white h-[calc(100vh-40px)] mt-[20px] ml-[20px] rounded-xl fixed top-0 left-0 shadow-lg">
         <div className="p-6">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+          <div onClick={()=> onLanding()} className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
             Portal Web
-          </h1>
+          </div>
         </div>
         
         <nav className="mt-4 px-3">
@@ -140,7 +147,7 @@ const Content: React.FC = () => {
   );
 };
 
-const Layout: React.FC = () => {
+const Layout = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Sidebar />
